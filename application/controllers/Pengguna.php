@@ -20,6 +20,8 @@ class Pengguna extends CI_Controller
             );
             redirect('auth');
         }
+
+        
         $data['title'] = 'Dashboard';
         $data['dashboard'] = $this->Model_dashboard->getAll();
 

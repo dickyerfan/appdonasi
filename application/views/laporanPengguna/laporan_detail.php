@@ -8,19 +8,17 @@
                         $namaDonasi = $this->uri->segment(4);
                         $namaDonasi = preg_replace("/[^a-zA-Z\']/", " ", $namaDonasi);
                     ?>
-                        <div class="col-8">
+                        <div class="col-7">
                             <a class="fw-bold text-dark logo" style="text-decoration:none ;"><?= strtoupper($title) ?> <?= strtoupper($namaDonasi)  ?></a>
-                        </div>
+                        </div>  
                         <?php
                                 $nama_id = $this->uri->segment(3);
                                 $nama_donasi = $this->uri->segment(4);
                             ?>
-                        <div class="col-4">
-                            <!-- <a id="saldo"><button class="btn btn-danger btn-sm logo"><i class="fas fa-dollar"></i> Saldo Awal</button></a> -->
+                        <div class="col-5">
                             <a href="<?= $url_cetak; ?>" target="_blank" class="btn btn-success btn-sm logo"><i class="fas fa-file-alt"></i> Export PDF</a>
-                            <!-- <a href="<?= base_url('laporan/ekspor')?>/<?= $nama_id ?>/<?= $nama_donasi ?>" target="_blank" class="btn btn-success btn-sm logo"><i class="fas fa-file-alt"></i> Export PDF</a> -->
                             <a id="belum"><button class="btn btn-warning btn-sm logo"><i class="fas fa-calendar-alt"></i> Pilih Waktu</button></a>
-                            <a href="<?= base_url('laporanPengguna'); ?>"><button class="btn btn-primary btn-sm logo float-end"><i class="fas fa-reply"></i> Kembali</button></a>
+                            <a href="<?= base_url('laporanPengguna'); ?>"><button class="btn btn-primary btn-sm"><i class="fas fa-reply"></i> Kembali</button></a>
                         </div>
                     </div>
                 </div>
@@ -141,9 +139,6 @@
                             return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
                         }
                         ?>
-                        <h5 class="text-center judul">AKSI BERSAMA YATIM BONDOWOSO</h5>
-                        <h5 class="text-center judul">LAPORAN DONASI <?= strtoupper($donasi->nama_donasi)  ?></h5>
-                        <h5 class="text-center judul">Bulan <?= $bln . '  ' . $tahun ?></h5>
                         <div class="col-md-12">
                             <table class="table table-bordered table-sm table-responsive">
                                 <thead>
@@ -185,63 +180,6 @@
                                 </tfoot>
                             </table>
                         </div>
-                        <!-- <div>
-                            <?php 
-                                $table = $this->uri->segment(4);
-                                $table = preg_replace("/[^a-zA-Z]/", "", $table);
-                                $table = substr($table, 0, 10);
-                                $table = strtolower($table);
-                                var_dump($table);
-
-                                $bulanskrng = date('m');
-                                if ($bulanskrng < 10) {
-                                    $bulanskrng = str_split($bulanskrng)[1];
-                                }
-                                $tahun = date('Y');
-                    
-                                if($bulanskrng == 1){
-                                    $bulanLalu = 12;
-                                    $tahun = $tahun - 1;
-                                }else{
-                                    $bulanLalu = $bulanskrng - 1;
-                                    $tahun = date('Y');
-                                }
-                                $this->db->select('sum(jml_transaksi) as masuk');
-                                $this->db->from($table);
-                                $this->db->where('MONTH(tgl_transaksi)', $bulanLalu);
-                                $this->db->where('YEAR(tgl_transaksi)', $tahun);
-                                $this->db->where('jenis_transaksi', 'Penerimaan');
-                                $masuk = $this->db->get()->result();
-                                foreach ($masuk as $row) {
-                                    $masuk = $row->masuk;
-                                }
-
-                                $this->db->select('sum(jml_transaksi) as keluar');
-                                $this->db->from($table);
-                                $this->db->where('MONTH(tgl_transaksi)', $bulanLalu);
-                                $this->db->where('YEAR(tgl_transaksi)', $tahun);
-                                $this->db->where('jenis_transaksi', 'Pengeluaran');
-                                $keluar = $this->db->get()->result();
-                                foreach ($keluar as $row) {
-                                    $keluar = $row->keluar;
-                                }
-                                $saldo = $masuk - $keluar;
-                                var_dump($saldo);
-
-                                $bulan = date('m');
-                                $tahun = date('Y');
-                        
-                                $table = $this->uri->segment(4);
-                                $table = preg_replace("/[^a-zA-Z]/", "", $table);
-                                $table = substr($table, 0, 10);
-                                $table = strtolower($table);
-                                $bulanDB =  $this->db->query("SELECT * FROM $table WHERE month(tgl_transaksi)=$bulan AND year(tgl_transaksi)= $tahun AND kode_saldo = 1 ORDER BY tgl_transaksi")->result();
-                                foreach($bulanDB as $row){
-                                    $bulanDB = $row->jml_transaksi;
-                                }
-                                var_dump($bulanDB);
-                             ?>
-                        </div> -->
                     </div>
                 </div>
             </div>

@@ -216,7 +216,18 @@
                             </div>
                         </div> -->
                     </div>
-                                        <!-- <?php
+                    <div class="row justify-content-center">
+                        <div class="col-auto">
+                            <div class="card">
+                                <div class="card-body bg-primary rounded text-light border-top border-warning border-5">
+                                    <p>
+                                    Aksi Bersama Yatim adalah sebuah komunitas dengan aktivitas  kelompok sosial keagamaan, berawal pada bulan April 2019 di  Bondowoso oleh sebuah grup WA BERTIGA. Aktifitas ABY berawal  dari kepedulian terhadap keluarga anak Yatim di Bondowoso, yang  ditindaklanjuti oleh penggalangan donasi lewat media sosial. Seiring  berjalannya waktu, Tim inti berkembang dan target ABY meluas  kepada kaum dhuafa.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <?php
                     $numOfCols = 3;
                     $rowCount = 0;
                     $bootstrapColWidth = 12 / $numOfCols;

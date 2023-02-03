@@ -8,19 +8,19 @@
                         $namaDonasi = $this->uri->segment(4);
                         $namaDonasi = preg_replace("/[^a-zA-Z\']/", " ", $namaDonasi);
                     ?>
-                        <div class="col-8">
+                        <div class="col-7">
                             <a class="fw-bold text-dark logo" style="text-decoration:none ;"><?= strtoupper($title) ?> <?= strtoupper($namaDonasi)  ?></a>
                         </div>  
                         <?php
                                 $nama_id = $this->uri->segment(3);
                                 $nama_donasi = $this->uri->segment(4);
                             ?>
-                        <div class="col-4">
+                        <div class="col-5">
                             <!-- <a id="saldo"><button class="btn btn-danger btn-sm logo"><i class="fas fa-dollar"></i> Saldo Awal</button></a> -->
                             <a href="<?= $url_cetak; ?>" target="_blank" class="btn btn-success btn-sm logo"><i class="fas fa-file-alt"></i> Export PDF</a>
                             <!-- <a href="<?= base_url('laporan/ekspor')?>/<?= $nama_id ?>/<?= $nama_donasi ?>" target="_blank" class="btn btn-success btn-sm logo"><i class="fas fa-file-alt"></i> Export PDF</a> -->
                             <a id="belum"><button class="btn btn-warning btn-sm logo"><i class="fas fa-calendar-alt"></i> Pilih Waktu</button></a>
-                            <a href="<?= base_url('laporan'); ?>"><button class="btn btn-primary btn-sm logo float-end"><i class="fas fa-reply"></i> Kembali</button></a>
+                            <a href="<?= base_url('laporan'); ?>"><button class="btn btn-primary btn-sm"><i class="fas fa-reply"></i> Kembali</button></a>
                         </div>
                     </div>
                 </div>

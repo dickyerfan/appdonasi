@@ -1,6 +1,6 @@
 <div id="layoutSidenav_content">
     <main>
-        <div class="container-fluid px-2 mt-2">
+        <div class="container-fluid px-2">
             <?= $this->session->flashdata('info'); ?>
             <?= $this->session->unset_userdata('info'); ?>
             <div class="card">

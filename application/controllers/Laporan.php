@@ -641,8 +641,8 @@ class Laporan extends CI_Controller
         }
 
         if (isset($_GET['add_post'])){
-            $tanggal_awalTahun = $tahun.'-'.$bulan.'-'.'01';
-            // $tanggal_awalTahun = '2023-01-01';
+            // $tanggal_awalTahun = $tahun.'-'.$bulan.'-'.'01';
+            $tanggal_awalTahun = '2023-01-01';
             $tanggal_awal = $_GET['tanggal_awal'];
             $tanggal_akhir = date('Y-m-d', strtotime('-1 days',strtotime($tanggal_awal)));
 
@@ -670,7 +670,8 @@ class Laporan extends CI_Controller
         }
 
         if (isset($_GET['add_post'])){
-            $tanggal_awalTahun = $tahun.'-'.$bulan.'-'.'01';
+            // $tanggal_awalTahun = $tahun.'-'.$bulan.'-'.'01';
+            $tanggal_awalTahun = '2023-01-01';
             $tanggal_awal = $_GET['tanggal_awal'];
             $tanggal_akhir = date('Y-m-d', strtotime('-1 days',strtotime($tanggal_awal)));
 
@@ -817,7 +818,8 @@ class Laporan extends CI_Controller
         }
 
         if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])){
-            $tanggal_awalTahun = $tahun.'-'.$bulan.'-'.'01';
+            // $tanggal_awalTahun = $tahun.'-'.$bulan.'-'.'01';
+            $tanggal_awalTahun = '2023-01-01';
             $tanggal_awal = $_GET['tanggal_awal'];
             $tanggal_akhir = date('Y-m-d', strtotime('-1 days',strtotime($tanggal_awal)));
 
@@ -845,7 +847,8 @@ class Laporan extends CI_Controller
         }
 
         if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])){
-            $tanggal_awalTahun = $tahun.'-'.$bulan.'-'.'01';
+            // $tanggal_awalTahun = $tahun.'-'.$bulan.'-'.'01';
+            $tanggal_awalTahun = '2023-01-01';
             $tanggal_awal = $_GET['tanggal_awal'];
             $tanggal_akhir = date('Y-m-d', strtotime('-1 days',strtotime($tanggal_awal)));
 

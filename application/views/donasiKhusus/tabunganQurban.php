@@ -4,13 +4,13 @@
             <div class="card">
                 <div class="card-header mb-2 shadow">
                 <div class="row">
-                        <div class="col-9">
+                        <div class="col-8">
                             <a class="fw-bold text-dark" style="text-decoration:none ;"><?= strtoupper($title) ?></a>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <a href="<?= base_url('donasiKhusus/tambah/'); ?>"><button class="btn btn-success btn-sm"><i class="fas fa-plus"></i>Tambah Penabung</button></a>
                             <!-- <a href="<?= base_url('donasiKhusus/detailTambah'); ?>"><button class="btn btn-warning btn-sm"><i class="fas fa-plus"></i> Input Tabungan</button></a> -->
-                            <a href="<?= base_url('donasiKhusus'); ?>"><button class="btn btn-primary btn-sm float-end"><i class="fas fa-reply"></i> Kembali</button></a>
+                            <a href="<?= base_url('donasiKhusus'); ?>"><button class="btn btn-primary btn-sm"><i class="fas fa-reply"></i> Kembali</button></a>
                         </div>
                     </div>
                 </div>

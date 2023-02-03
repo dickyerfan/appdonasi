@@ -88,11 +88,11 @@
                 flex: 0 0 calc(100%/3); 
             }
             .img-wrapper{
-            height:23vw;
+            height:20vw;
             background-color:skyblue;           
             }
-
         }
+
         .carousel-inner {
                 padding: 1em;
             }
@@ -112,7 +112,7 @@
             transform: translateY(-50%);
         }
         .carousel-control-prev:hover, .carousel-control-next:hover{
-            opacity: .8;
+            opacity: .9;
         }    
     </style>
 

@@ -4,17 +4,17 @@
             <div class="card">
                 <div class="card-header shadow">
                     <div class="row">
-                        <div class="col-8">
+                        <div class="col-7">
                             <a class="fw-bold text-dark" style="text-decoration:none ;"><?= strtoupper($title) ?></a>
                         </div>
-                        <div class="col-4">
+                        <div class="col-5">
                             <?php
                             $table = $this->uri->segment(4);
                             $idDonasi = $this->uri->segment(3);
                             $namaDonasi = $this->uri->segment(4);
                             $namaDonasi = preg_replace("/[^a-zA-Z]/", "", $namaDonasi);
                             ?>
-                            <a href="<?= base_url('donasiUmum/tambah/'); ?><?=$idDonasi?>/<?= $table ?>"><button class="btn btn-primary btn-sm float-end"><i class="fas fa-plus"></i> Input Transaksi</button></a>
+                            <a href="<?= base_url('donasiUmum/tambah/'); ?><?=$idDonasi?>/<?= $table ?>"><button class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Input Transaksi</button></a>
                             <a id="saldo"><button class="btn btn-success btn-sm logo"><i class="fas fa-dollar"></i> Saldo Awal</button></a>
                             <button id="belum" class="btn btn-warning btn-sm"><i class="fas fa-calendar-alt"></i> Pilih Waktu</button>
                             <!-- <a href="<?= base_url('detailDonasi'); ?>"><button class="btn btn-primary btn-sm float-end"><i class="fas fa-reply"></i> Kembali</button></a> -->

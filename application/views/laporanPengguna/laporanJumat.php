@@ -10,8 +10,8 @@
                         <div class="col-6">
                             <a href="<?= $url_cetak?>" target="_blank" class="btn btn-success btn-sm logo"><i class="fas fa-file-alt"></i> Export PDF</a>
                             <a id="belum"><button class="btn btn-warning btn-sm logo"><i class="fas fa-calendar-alt"></i> Pilih Waktu</button></a>
-                            <a href="<?= base_url('laporan/tambahDonasi'); ?>"><button class="btn btn-secondary btn-sm"><i class="fas fa-plus"></i> input Donasi</button></a>
-                            <a href="<?= base_url('laporan'); ?>"><button class="btn btn-primary btn-sm"><i class="fas fa-reply"></i> Kembali</button></a>
+                            <!-- <a href="<?= base_url('laporanPengguna/tambahDonasi'); ?>"><button class="btn btn-secondary btn-sm"><i class="fas fa-plus"></i> input Donasi</button></a> -->
+                            <a href="<?= base_url('laporanPengguna'); ?>"><button class="btn btn-primary btn-sm"><i class="fas fa-reply"></i> Kembali</button></a>
                         </div>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                         <div class="col-12">
                             <div class="card bg-light shadow text-center text-dark">
                                 <div class="card-body">
-                                    <form action="<?= base_url('laporan/jumat') ?>" method="GET">
+                                    <form action="<?= base_url('laporanPengguna/jumat') ?>" method="GET">
                                     <div class="row">
                                         <div class="col-4">
                                             <div class="form-group">
