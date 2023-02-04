@@ -15,7 +15,7 @@
 </head>
 
 <body style="background-color:#298EC6 ;">
-    <div class="container py-5">
+    <div class="container py-4">
         <div class="row bg-white justify-content-center p-4 shadow rounded">
             <div class="col-md-6 ">
                 <h2 class="display-1 fs-2 text-primary text-center">Selamat Datang <br> di Aplikasi Donasi Online <br> ABY Bondowoso</h2>

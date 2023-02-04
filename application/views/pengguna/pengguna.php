@@ -216,7 +216,7 @@
                             </div>
                         </div> -->
                     </div>
-                    <div class="row justify-content-center">
+                    <!-- <div class="row justify-content-center">
                         <div class="col-auto">
                             <div class="card">
                                 <div class="card-body bg-primary rounded text-light border-top border-warning border-5">
@@ -226,7 +226,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- <?php
                     $numOfCols = 3;
                     $rowCount = 0;

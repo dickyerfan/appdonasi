@@ -48,6 +48,18 @@
                 display: block;
             }
         }
+
+        @media (max-width:460px){
+            .card1{
+                /* height:300px !important; */
+                font-size:0.8em !important;
+            }
+        }
+
+        .bg-primary:hover{
+            box-shadow: 2px 2px 10px rgb(0, 0, 0);
+            transform: translateY(-6px);
+        }
     </style>
 
 </head>

@@ -11,7 +11,7 @@ class Model_auth extends CI_Model
             'nama_lengkap' => $this->input->post('nama_lengkap', true),
             'email' => $this->input->post('email', true),
             'password' => password_hash($this->input->post('password', true), PASSWORD_DEFAULT),
-            'level' => $this->input->post('level', true),
+            'level' => 'Pengguna',
         ];
 
         return $this->db->insert('user', $data);
