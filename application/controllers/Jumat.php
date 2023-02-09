@@ -66,6 +66,7 @@ class Jumat extends CI_Controller
                     </button>
                   </div>'
             );
+            helper_log('Tambah Data di Sedekah Jum\'at', $this->input->post('nama_transaksi').' | '.$this->input->post('jml_transaksi').' | '.date('Y-m-d'));
             redirect('jumat');
         }
     }
@@ -83,6 +84,8 @@ class Jumat extends CI_Controller
 
     public function hapus($id)
     {
+        $id_transaksi = $this->uri->segment(4);
+        helper_log('Hapus Data di Sedekah Jum\'at' , $this->input->post('nama_transaksi').''.$this->input->post('jml_transaksi'));
 
         $this->Model_jumat->hapusData($id);
         $this->session->set_flashdata(
@@ -118,6 +121,7 @@ class Jumat extends CI_Controller
                     </button>
                   </div>'
         );
+        helper_log('Update Data di Sedekah Jum\'at', $this->input->post('nama_transaksi').' | '.$this->input->post('jml_transaksi').' | '.$this->input->post('tgl_transaksi'));
         redirect('jumat');
         
     }

@@ -98,6 +98,7 @@ class DonasiKhusus extends CI_Controller
                     </button>
                   </div>'
             );
+            helper_log('Tambah Penabung di Tabungan Qurban', $this->input->post('nama_penabung').' | '.$this->input->post('alamat'));
             redirect('donasiKhusus/tabunganQurban');
         }
     }
@@ -115,6 +116,9 @@ class DonasiKhusus extends CI_Controller
 
     public function update()
     {
+        $namaPenabung = $this->uri->segment(5);
+        $namaPenabung = preg_replace("/[^a-zA-Z&\']/", " ", $namaPenabung);
+
         $this->Model_donasiKhusus->updateData();
         if ($this->db->affected_rows() <= 0) {
             $this->session->set_flashdata(
@@ -135,6 +139,7 @@ class DonasiKhusus extends CI_Controller
                         </button>
                       </div>'
             );
+            helper_log('Update Status Penabung', $namaPenabung);
             redirect('donasiKhusus/tabunganQurban');
         }
     }
@@ -248,6 +253,7 @@ class DonasiKhusus extends CI_Controller
                     </button>
                   </div>'
             );
+            helper_log('Tambah Data di Tabungan Qurban', $namaPenabung.' | '.$this->input->post('jml_tabungan'));
             redirect('donasikhusus/detail/' .$idPenabung.'/'. $namaPenabung);
         }
     }
@@ -265,6 +271,7 @@ class DonasiKhusus extends CI_Controller
                     </button>
                   </div>'
         );
+        helper_log('Hapus Data di Tabungan Qurban', $namaPenabung);
         redirect('donasikhusus/detail/' .$idPenabung.'/'. $namaPenabung);
     }
 
@@ -313,6 +320,7 @@ class DonasiKhusus extends CI_Controller
                         </button>
                       </div>'
             );
+            helper_log('Ambil Tabungan Qurban',$this->input->post('status_tabungan'));
             redirect('donasiKhusus/tabunganQurban');
         }
     }

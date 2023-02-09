@@ -38,6 +38,7 @@ class Auth extends CI_Controller
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                         </button>
                       </div>');
+                        helper_log('login', 'User Melakukan login');
                         redirect('dashboard');
                     }elseif($cek_nama_pengguna->level == 'SuperAdmin') {
                         $data_session = [
@@ -53,6 +54,7 @@ class Auth extends CI_Controller
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                         </button>
                       </div>');
+                        helper_log('login', 'User Melakukan login');
                         redirect('dashboard');
                     } else {
                         $data_session = [
@@ -68,6 +70,7 @@ class Auth extends CI_Controller
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                         </button>
                       </div>');
+                        helper_log('Login', 'User Melakukan Login');
                         redirect('pengguna');
                     }
                 } else { //jika password salah
@@ -102,6 +105,7 @@ class Auth extends CI_Controller
             $this->load->view('auth/view_registrasi', $data);
         } else {
             $this->model_auth->registrasi();
+            helper_log_reg('Daftar User Baru', 'Sebagai Pengguna');
             redirect('auth');
         }
     }
@@ -109,12 +113,12 @@ class Auth extends CI_Controller
     public function logout()
     {
 
+        helper_log('Logout', 'User Melakukan Logout');
         $this->session->unset_userdata('nama_pengguna');
         $this->session->unset_userdata('nama_lengkap');
         $this->session->unset_userdata('email');
         $this->session->unset_userdata('password');
         $this->session->unset_userdata('level');
-
         $this->session->set_flashdata('info', '<div class="alert alert-success" role="alert">Selamat, Anda Berhasil Logout!</div>');
         redirect('auth');
     }

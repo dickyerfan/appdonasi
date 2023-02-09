@@ -14,16 +14,6 @@
                     <form class="user" action="" method="POST">
                         <div class="row">
                             <div class="col-md-6">
-                                <!-- <div class="form-group">
-                                    <label for="id_donasi">Nama Donasi :</label>
-                                    <select name="id_donasi" id="id_donasi" class="form-control select2">
-                                        <option value="">Pilih Donasi</option>
-                                        <?php foreach ($donasi as $row) : ?>
-                                            <option value="<?= $row->id_donasi ?>"><?= $row->nama_donasi ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <small class="form-text text-danger pl-3"><?= form_error('id_jabatan'); ?></small>
-                                </div> -->
                                 <div class="form-group">
                                     <label for="nama_transaksi">Nama Transaksi :</label>
                                     <input type="text" class="form-control" id="nama_transaksi" name="nama_transaksi" placeholder="Masukan Nama Transaksi" value="<?= set_value('nama_transaksi'); ?>">

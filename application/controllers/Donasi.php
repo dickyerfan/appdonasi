@@ -66,6 +66,7 @@ class donasi extends CI_Controller
                     </button>
                   </div>'
             );
+            helper_log('Tambah Donasi', $this->input->post('nama_donasi'));
             redirect('donasi');
         }
     }
@@ -103,6 +104,7 @@ class donasi extends CI_Controller
                         </button>
                       </div>'
             );
+            helper_log('Update Donasi', $this->input->post('deskripsi'));
             redirect('donasi');
         }
     }
@@ -118,6 +120,7 @@ class donasi extends CI_Controller
                     </button>
                   </div>'
         );
+        helper_log('Hapus Donasi', $this->input->post('nama_donasi'));
         redirect('donasi');
     }
 

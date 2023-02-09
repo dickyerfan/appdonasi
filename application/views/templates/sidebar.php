@@ -39,6 +39,10 @@
                             <a class="nav-link" href="<?= base_url('user/user') ?>">Data User</a>
                         </nav>
                     </div> -->
+                    <a class="nav-link" href="<?= base_url('histori') ?>">
+                        <div class="sb-nav-link-icon"><i class="fas fa-users fa-fw"></i></div>
+                        Log Histori
+                    </a>
                     <a class="nav-link" href="<?= base_url('user/admin') ?>">
                         <div class="sb-nav-link-icon"><i class="fas fa-user fa-fw"></i></div>
                         Data User

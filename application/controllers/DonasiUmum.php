@@ -70,8 +70,12 @@ class DonasiUmum extends CI_Controller
     {
         $title = $this->uri->segment(4);
         $title = preg_replace("/[^a-zA-Z&']/", " ", $title);
+        $id_transaksi = $this->uri->segment(3);
         $namaDonasi = $this->uri->segment(4);
         $idDonasi = $this->uri->segment(5);
+
+        helper_log('Hapus Transaksi di '.$namaDonasi.' | id : '.$id_transaksi, $this->input->post('nama_transaksi').' '.$this->input->post('jml_transaksi').' '.$this->input->post('tgl_transaksi'));
+
         $this->Model_donasiUmum->hapusData($id);
         $this->session->set_flashdata(
             'info',
@@ -81,6 +85,7 @@ class DonasiUmum extends CI_Controller
                     </button>
                   </div>'
         );
+
         redirect('donasiUmum/detail/' .$idDonasi.'/'. $namaDonasi);
     }
 
@@ -115,13 +120,13 @@ class DonasiUmum extends CI_Controller
                     </button>
                   </div>'
         );
+        helper_log('Update Transaksi di '.$namaDonasi.' | id : '.$this->input->post('id_transaksi'), $this->input->post('nama_transaksi').' | '.$this->input->post('jml_transaksi').' | '.$this->input->post('tgl_transaksi'));
         redirect('donasiUmum/detail/' .$idDonasi.'/'. $namaDonasi);
         
     }
 
     public function tambah()
     {
-        // $title = $this->input->get('nama_donasi');
         $title = $this->uri->segment(4);
         $title = preg_replace("/[^a-zA-Z&']/", " ", $title);
 
@@ -151,6 +156,7 @@ class DonasiUmum extends CI_Controller
                     </button>
                   </div>'
             );
+            helper_log('Tambah Transaksi di '.$namaDonasi, $this->input->post('nama_transaksi').' | '.$this->input->post('jml_transaksi').' | '.date('Y-m-d'));
             redirect('donasiUmum/detail/' .$idDonasi.'/'. $namaDonasi);
         }
     }
@@ -280,6 +286,7 @@ class DonasiUmum extends CI_Controller
                 </button>
               </div>'
             );
+            helper_log('Tambah Saldo Awal di '.$namaDonasi, date('Y-m-d'));
             redirect($alamat);
         }
     }

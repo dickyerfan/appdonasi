@@ -154,6 +154,18 @@ if (window.matchMedia("(min-width: 576px)").matches) {
 }
 </script>
 
+<script>
+    window.setTimeout(function() {
+        $( ".alert" ).animate({
+    left: "+=50",
+    width: "350"
+  }, 5000, function() {
+  }).fadeTo(1000, 0).slideUp(1000, function(){
+            $(this).remove(); 
+        });
+    }, 1000);
+</script>
+
 </body>
 
 </html>
