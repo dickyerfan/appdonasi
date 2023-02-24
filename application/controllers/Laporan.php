@@ -11,8 +11,8 @@ class Laporan extends CI_Controller
         $table = $this->session->nama_donasi;
         $table = substr($table, 0, 5);
         $table = strtolower($table);
-        
-        if(!$this->session->userdata('level')){
+
+        if (!$this->session->userdata('level')) {
             $this->session->set_flashdata(
                 'info',
                 '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -60,19 +60,19 @@ class Laporan extends CI_Controller
         }
         $nama_id = $this->uri->segment(3);
         $nama_donasi = $this->uri->segment(4);
-        
+
         if (isset($_GET['add_post'])) {
             $bulan = $_GET['bulan'];
             $tahun = $_GET['tahun'];
             $tanggal = $tahun . '-' . $bulan . '-01';
             $data['tanggal'] = $tanggal;
-            $url_cetak = 'laporan/ekspor/'.$nama_id.'/'.$nama_donasi.'?bulan=' . $bulan . '&tahun=' . $tahun;
+            $url_cetak = 'laporan/ekspor/' . $nama_id . '/' . $nama_donasi . '?bulan=' . $bulan . '&tahun=' . $tahun;
         } else {
             $bulan = date('m');
             $tahun = date('Y');
             $tanggal = $tahun . '-' . $bulan . '-01';
             $data['tanggal'] = $tanggal;
-            $url_cetak = 'laporan/ekspor/'.$nama_id.'/'.$nama_donasi.'?bulan=' . $bulan . '&tahun=' . $tahun;
+            $url_cetak = 'laporan/ekspor/' . $nama_id . '/' . $nama_donasi . '?bulan=' . $bulan . '&tahun=' . $tahun;
         }
 
         $this->db->select('sum(jml_transaksi) as masuk');
@@ -80,7 +80,7 @@ class Laporan extends CI_Controller
         $this->db->where('MONTH(tgl_transaksi)', $bulan);
         $this->db->where('YEAR(tgl_transaksi)', $tahun);
         $this->db->where('jenis_transaksi', 'Penerimaan');
-        $this->db->where('id_donasi',$nama_id);
+        $this->db->where('id_donasi', $nama_id);
         $masuk = $this->db->get()->result();
         foreach ($masuk as $row) {
             $masuk = $row->masuk;
@@ -91,12 +91,12 @@ class Laporan extends CI_Controller
         $this->db->where('MONTH(tgl_transaksi)', $bulan);
         $this->db->where('YEAR(tgl_transaksi)', $tahun);
         $this->db->where('jenis_transaksi', 'Pengeluaran');
-        $this->db->where('id_donasi',$nama_id);
+        $this->db->where('id_donasi', $nama_id);
         $keluar = $this->db->get()->result();
         foreach ($keluar as $row) {
             $keluar = $row->keluar;
         }
-        
+
         $data['title'] = 'Laporan Donasi';
         $data['donasi'] = $this->Model_laporan->getDetail($id);
         $data['transaksi'] = $this->Model_laporan->getTransaksi();
@@ -128,14 +128,14 @@ class Laporan extends CI_Controller
     //             $tahun = date('Y');
     //         }
 
-        
+
     //     $id = $this->uri->segment(3);
-        
+
     //     $table = $this->uri->segment(4);
     //     $table = preg_replace("/[^a-zA-Z]/", "", $table);
     //     $table = substr($table, 0, 10);
     //     $table = strtolower($table);
-        
+
     //     $bulanSaldo = date('m');
     //     $tahunSaldo = date('Y');
     //     $alamat = 'laporan/detail/' . $id .'/' . $table ;
@@ -161,7 +161,7 @@ class Laporan extends CI_Controller
     //         $keluar = $row->keluar;
     //     }
     //     $saldo = $masuk - $keluar;
-    
+
     //     $bulanDB = $this->Model_laporan->getSaldo();
     //     foreach($bulanDB as $row){
     //         $bulanDB = $row->jml_transaksi;
@@ -242,7 +242,8 @@ class Laporan extends CI_Controller
     //     }
     // }
 
-    public function ekspor(){
+    public function ekspor()
+    {
 
         if (isset($_GET['bulan']) && ($_GET['tahun'])) {
             $bulan = $_GET['bulan'];
@@ -291,7 +292,7 @@ class Laporan extends CI_Controller
         }
 
         $title = $this->uri->segment(4);
-        $title = preg_replace("/[^a-zA-Z\']/",' ', $title);
+        $title = preg_replace("/[^a-zA-Z\']/", ' ', $title);
         $title2 = strtoupper($title);
 
         $this->load->library('pdf');
@@ -306,7 +307,7 @@ class Laporan extends CI_Controller
         $pdf->Cell(190, 4, 'Yayasan Rumah Sedekah Bondowoso/Aksi Bersama Yatim', 0, 1, 'C');
         $pdf->SetFont('scada', '', 13);
         $pdf->Cell(5, 7, '', 0, 0, 'C');
-        $pdf->Cell(190, 7, 'LAPORAN KEUANGAN DONASI '.$title2, 0, 1, 'C');
+        $pdf->Cell(190, 7, 'LAPORAN KEUANGAN DONASI ' . $title2, 0, 1, 'C');
         $pdf->Image(base_url('assets/img/aby.png'), 170, 10, 30, 12);
         $pdf->SetFont('scada', '', 10);
         $pdf->Cell(5, 4, '', 0, 0, 'C');
@@ -429,18 +430,18 @@ class Laporan extends CI_Controller
         $pdf->SetFillColor(51, 148, 245,);
         $pdf->SetFont('scada', '', 9);
         $pdf->Cell(5, 6, '', 0, 0, 'C');
-        $pdf->Cell(125, 6, 'Total', 1, 0, 'C',[35, 178, 222]);
-        $pdf->Cell(30, 6, number_format($masuk, '0', ',', '.') . ',-', 1, 0, 'R',[35, 178, 222]);
-        $pdf->Cell(30, 6, number_format($keluar, '0', ',', '.') . ',-', 1, 0, 'R',[35, 178, 222]);
+        $pdf->Cell(125, 6, 'Total', 1, 0, 'C', [35, 178, 222]);
+        $pdf->Cell(30, 6, number_format($masuk, '0', ',', '.') . ',-', 1, 0, 'R', [35, 178, 222]);
+        $pdf->Cell(30, 6, number_format($keluar, '0', ',', '.') . ',-', 1, 0, 'R', [35, 178, 222]);
         $pdf->Cell(5, 6, '', 0, 1, 'C');
         $pdf->SetFont('scada', '', 10);
         $pdf->SetFillColor(29, 117, 240,);
         $pdf->Cell(5, 6, '', 0, 0, 'C');
-        $pdf->Cell(125, 6, 'Saldo', 1, 0, 'C',[29, 117, 240]);
-        $pdf->Cell(60, 6, number_format($saldo, '0', ',', '.') . ',-', 1, 0, 'R',[29, 117, 240]);
+        $pdf->Cell(125, 6, 'Saldo', 1, 0, 'C', [29, 117, 240]);
+        $pdf->Cell(60, 6, number_format($saldo, '0', ',', '.') . ',-', 1, 0, 'R', [29, 117, 240]);
         $pdf->Cell(5, 6, '', 0, 1, 'C');
         $pdf->Cell(5, 1, '', 0, 0, 'C');
-        $pdf->Cell(185, 1, '', 1, 1, 'C',[29, 117, 240]);
+        $pdf->Cell(185, 1, '', 1, 1, 'C', [29, 117, 240]);
 
         $tanggal = date('d');
         $bulan = date('m');
@@ -486,7 +487,7 @@ class Laporan extends CI_Controller
 
         $pdf->Cell(190, 2, '', 0, 1, 'C');
         $pdf->Cell(95, 6, '', 0, 0, 'C');
-        $pdf->Cell(95, 6, 'Bondowoso,'.' '. $tanggal.' '.$bulan.' '.$tahun, 0, 1, 'C');
+        $pdf->Cell(95, 6, 'Bondowoso,' . ' ' . $tanggal . ' ' . $bulan . ' ' . $tahun, 0, 1, 'C');
         $pdf->Cell(95, 6, 'Mengetahui', 0, 0, 'C');
         $pdf->Cell(95, 6, 'Dibuat Oleh,', 0, 1, 'C');
         $pdf->Cell(95, 6, 'Ketua Yayasan', 0, 0, 'C');
@@ -494,7 +495,7 @@ class Laporan extends CI_Controller
         $pdf->Cell(190, 10, '', 0, 1, 'C');
         $pdf->Cell(95, 6, 'Abu Fulan', 0, 0, 'C');
         $pdf->Cell(95, 6, 'Abu Fulan', 0, 1, 'C');
-        $pdf->Output('I', 'Laporan Keuangan Donasi '. $title.' ' . $bln . ' ' . $tahun . '.pdf');
+        $pdf->Output('I', 'Laporan Keuangan Donasi ' . $title . ' ' . $bln . ' ' . $tahun . '.pdf');
     }
 
     public function taqur()
@@ -557,7 +558,7 @@ class Laporan extends CI_Controller
         $pdf->Image(base_url('assets/img/aby.png'), 170, 10, 30, 12);
         $pdf->SetFont('scada', '', 10);
         $pdf->Cell(5, 4, '', 0, 0, 'C');
-        $pdf->Cell(190, 4, 'PER '. $tanggal.' ' . $bulan . ' '  . $tahun, 0, 1, 'C');
+        $pdf->Cell(190, 4, 'PER ' . $tanggal . ' ' . $bulan . ' '  . $tahun, 0, 1, 'C');
         // $pdf->Cell(190, 4, 'Bulan ' . $bulan . ' '  . $tahun, 0, 1, 'L');
 
         $pdf->Cell(10, 1, '', 0, 1);
@@ -591,29 +592,29 @@ class Laporan extends CI_Controller
             $tabungan = $this->db->query("SELECT sum(jml_tabungan) as tabungan FROM taqur JOIN detail_taqur ON taqur.id_penabung = detail_taqur.id_penabung WHERE taqur.id_penabung = $id AND detail_taqur.status_tabungan = 1")->result();
             foreach ($tabungan as $row) {
                 $tabungan = $row->tabungan;
-            } 
-            $pdf->Cell(35, 6, number_format($tabungan,0,',','.').',-', 1, 1, 'R');
+            }
+            $pdf->Cell(35, 6, number_format($tabungan, 0, ',', '.') . ',-', 1, 1, 'R');
         }
 
         $pdf->SetFont('scada', '', 10);
         $pdf->SetFillColor(29, 117, 240,);
         $pdf->Cell(5, 6, '', 0, 0, 'C');
-        $pdf->Cell(150, 6, 'Total Tabungan', 1, 0, 'C',[29, 117, 240]);
+        $pdf->Cell(150, 6, 'Total Tabungan', 1, 0, 'C', [29, 117, 240]);
 
         $totalTabungan = $this->db->query("SELECT sum(jml_tabungan) as totalTabungan FROM taqur JOIN detail_taqur ON taqur.id_penabung = detail_taqur.id_penabung WHERE detail_taqur.status_tabungan = 1")->result();
         foreach ($totalTabungan as $row) {
             $totalTabungan = $row->totalTabungan;
-        } 
+        }
 
-        $pdf->Cell(35, 6, number_format($totalTabungan,0,',','.').',-', 1, 0, 'R',[29, 117, 240]);
+        $pdf->Cell(35, 6, number_format($totalTabungan, 0, ',', '.') . ',-', 1, 0, 'R', [29, 117, 240]);
         $pdf->Cell(5, 6, '', 0, 1, 'C');
         $pdf->Cell(5, 1, '', 0, 0, 'C');
-        $pdf->Cell(185, 1, '', 1, 1, 'C',[29, 117, 240]);
+        $pdf->Cell(185, 1, '', 1, 1, 'C', [29, 117, 240]);
 
 
         $pdf->Cell(190, 2, '', 0, 1, 'C');
         $pdf->Cell(95, 6, '', 0, 0, 'C');
-        $pdf->Cell(95, 6, 'Bondowoso,'.' '. $tanggal.' '.$bulan.' '.$tahun, 0, 1, 'C');
+        $pdf->Cell(95, 6, 'Bondowoso,' . ' ' . $tanggal . ' ' . $bulan . ' ' . $tahun, 0, 1, 'C');
         $pdf->Cell(95, 6, 'Mengetahui', 0, 0, 'C');
         $pdf->Cell(95, 6, 'Dibuat Oleh,', 0, 1, 'C');
         $pdf->Cell(95, 6, 'Ketua Yayasan', 0, 0, 'C');
@@ -628,7 +629,7 @@ class Laporan extends CI_Controller
     public function jumat()
     {
         $bulan = date('m');
-        $tahun = date('Y');   
+        $tahun = date('Y');
 
         if (isset($_GET['add_post'])) {
             $tanggal_awal = $_GET['tanggal_awal'];
@@ -640,22 +641,22 @@ class Laporan extends CI_Controller
             $url_cetak = 'eksporJumat?tanggal_awal=' . $tanggal_awal . '&tanggal_akhir=' . $tanggal_akhir;
         }
 
-        if (isset($_GET['add_post'])){
+        if (isset($_GET['add_post'])) {
             // $tanggal_awalTahun = $tahun.'-'.$bulan.'-'.'01';
             $tanggal_awalTahun = '2023-01-01';
             $tanggal_awal = $_GET['tanggal_awal'];
-            $tanggal_akhir = date('Y-m-d', strtotime('-1 days',strtotime($tanggal_awal)));
+            $tanggal_akhir = date('Y-m-d', strtotime('-1 days', strtotime($tanggal_awal)));
 
             $this->db->select('sum(jml_transaksi) as masukLalu');
             $this->db->from('sedekah_jumat');
-            $this->db->where('tgl_transaksi BETWEEN"'.$tanggal_awalTahun.'" AND "'.$tanggal_akhir.'"');
+            $this->db->where('tgl_transaksi BETWEEN"' . $tanggal_awalTahun . '" AND "' . $tanggal_akhir . '"');
             $this->db->where('jenis_transaksi', 'Penerimaan');
             $this->db->order_by('tgl_transaksi');
             $masukLalu = $this->db->get()->result();
             foreach ($masukLalu as $row) {
                 $masukLalu = $row->masukLalu;
             }
-        }else{
+        } else {
             $this->db->select('sum(jml_transaksi) as masukLalu');
             $this->db->from('sedekah_jumat');
             $this->db->where('MONTH(tgl_transaksi)', $bulan);
@@ -669,22 +670,22 @@ class Laporan extends CI_Controller
             }
         }
 
-        if (isset($_GET['add_post'])){
+        if (isset($_GET['add_post'])) {
             // $tanggal_awalTahun = $tahun.'-'.$bulan.'-'.'01';
             $tanggal_awalTahun = '2023-01-01';
             $tanggal_awal = $_GET['tanggal_awal'];
-            $tanggal_akhir = date('Y-m-d', strtotime('-1 days',strtotime($tanggal_awal)));
+            $tanggal_akhir = date('Y-m-d', strtotime('-1 days', strtotime($tanggal_awal)));
 
             $this->db->select('sum(jml_transaksi) as keluarLalu');
             $this->db->from('sedekah_jumat');
-            $this->db->where('tgl_transaksi BETWEEN"'.$tanggal_awalTahun.'" AND "'.$tanggal_akhir.'"');
+            $this->db->where('tgl_transaksi BETWEEN"' . $tanggal_awalTahun . '" AND "' . $tanggal_akhir . '"');
             $this->db->where('jenis_transaksi', 'Pengeluaran');
             $this->db->order_by('tgl_transaksi');
             $keluarLalu = $this->db->get()->result();
             foreach ($keluarLalu as $row) {
                 $keluarLalu = $row->keluarLalu;
             }
-        }else{
+        } else {
             $this->db->select('sum(jml_transaksi) as keluarLalu');
             $this->db->from('sedekah_jumat');
             $this->db->where('MONTH(tgl_transaksi)', $bulan);
@@ -702,19 +703,19 @@ class Laporan extends CI_Controller
         $data['totalKeluarLalu'] = $keluarLalu;
         $data['saldoLalu'] =  $masukLalu - $keluarLalu;
 
-        if (isset($_GET['add_post'])){
+        if (isset($_GET['add_post'])) {
             $tanggal_awal = $_GET['tanggal_awal'];
             $tanggal_akhir = $_GET['tanggal_akhir'];
             $this->db->select('sum(jml_transaksi) as masuk');
             $this->db->from('sedekah_jumat');
-            $this->db->where('tgl_transaksi BETWEEN"'.$tanggal_awal.'" AND "'.$tanggal_akhir.'"');
+            $this->db->where('tgl_transaksi BETWEEN"' . $tanggal_awal . '" AND "' . $tanggal_akhir . '"');
             $this->db->where('jenis_transaksi', 'Penerimaan');
             $this->db->order_by('tgl_transaksi');
             $masuk = $this->db->get()->result();
             foreach ($masuk as $row) {
                 $masuk = $row->masuk;
             }
-        }else{
+        } else {
             $this->db->select('sum(jml_transaksi) as masuk');
             $this->db->from('sedekah_jumat');
             $this->db->where('MONTH(tgl_transaksi)', $bulan);
@@ -728,19 +729,19 @@ class Laporan extends CI_Controller
             }
         }
 
-        if (isset($_GET['add_post'])){
+        if (isset($_GET['add_post'])) {
             $tanggal_awal = $_GET['tanggal_awal'];
             $tanggal_akhir = $_GET['tanggal_akhir'];
             $this->db->select('sum(jml_transaksi) as keluar');
             $this->db->from('sedekah_jumat');
-            $this->db->where('tgl_transaksi BETWEEN"'.$tanggal_awal.'" AND "'.$tanggal_akhir.'"');
+            $this->db->where('tgl_transaksi BETWEEN"' . $tanggal_awal . '" AND "' . $tanggal_akhir . '"');
             $this->db->where('jenis_transaksi', 'Pengeluaran');
             $this->db->order_by('tgl_transaksi');
             $keluar = $this->db->get()->result();
             foreach ($keluar as $row) {
                 $keluar = $row->keluar;
             }
-        }else{
+        } else {
             $this->db->select('sum(jml_transaksi) as keluar');
             $this->db->from('sedekah_jumat');
             $this->db->where('MONTH(tgl_transaksi)', $bulan);
@@ -755,7 +756,7 @@ class Laporan extends CI_Controller
         }
         $data['totalMasuk'] = $masuk + $masukLalu - $keluarLalu;
         $data['totalKeluar'] = $keluar;
-        $data['saldo'] =  $masuk + ($masukLalu - $keluarLalu)- $keluar;
+        $data['saldo'] =  $masuk + ($masukLalu - $keluarLalu) - $keluar;
 
 
         $data['title'] = 'Laporan Sedekah Jumat';
@@ -781,58 +782,57 @@ class Laporan extends CI_Controller
         $this->form_validation->set_message('required', '%s masih kosong');
 
         if ($this->form_validation->run() == false) {
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('laporan/viewTambahDonasi', $data);
-        $this->load->view('templates/footer');
-        } 
-        else {
-            
-        $data['tambahDonasi'] = $this->Model_laporan->TambahDonasi();
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('laporan/viewTambahDonasi', $data);
+            $this->load->view('templates/footer');
+        } else {
 
-        $this->session->set_flashdata(
-            'info',
-            '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+            $data['tambahDonasi'] = $this->Model_laporan->TambahDonasi();
+
+            $this->session->set_flashdata(
+                'info',
+                '<div class="alert alert-primary alert-dismissible fade show" role="alert">
                 <strong>Sukses,</strong> Donasi lain2 berhasil di tambah
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                 </button>
               </div>'
-        );
-        redirect('laporan/jumat');
+            );
+            redirect('laporan/jumat');
         }
-        
     }
 
-    public function eksporJumat(){
+    public function eksporJumat()
+    {
 
         $bulan = date('m');
-        $tahun = date('Y');   
+        $tahun = date('Y');
 
         if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])) {
             $tanggal_awal = $_GET['tanggal_awal'];
             $tanggal_akhir = $_GET['tanggal_akhir'];
         } else {
             $tanggal_awal = '';
-            $tanggal_akhir ='';
+            $tanggal_akhir = '';
         }
 
-        if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])){
+        if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])) {
             // $tanggal_awalTahun = $tahun.'-'.$bulan.'-'.'01';
             $tanggal_awalTahun = '2023-01-01';
             $tanggal_awal = $_GET['tanggal_awal'];
-            $tanggal_akhir = date('Y-m-d', strtotime('-1 days',strtotime($tanggal_awal)));
+            $tanggal_akhir = date('Y-m-d', strtotime('-1 days', strtotime($tanggal_awal)));
 
             $this->db->select('sum(jml_transaksi) as masukLalu');
             $this->db->from('sedekah_jumat');
-            $this->db->where('tgl_transaksi BETWEEN"'.$tanggal_awalTahun.'" AND "'.$tanggal_akhir.'"');
+            $this->db->where('tgl_transaksi BETWEEN"' . $tanggal_awalTahun . '" AND "' . $tanggal_akhir . '"');
             $this->db->where('jenis_transaksi', 'Penerimaan');
             $this->db->order_by('tgl_transaksi');
             $masukLalu = $this->db->get()->result();
             foreach ($masukLalu as $row) {
                 $masukLalu = $row->masukLalu;
             }
-        }else{
+        } else {
             $this->db->select('sum(jml_transaksi) as masukLalu');
             $this->db->from('sedekah_jumat');
             $this->db->where('MONTH(tgl_transaksi)', $bulan);
@@ -846,22 +846,22 @@ class Laporan extends CI_Controller
             }
         }
 
-        if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])){
+        if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])) {
             // $tanggal_awalTahun = $tahun.'-'.$bulan.'-'.'01';
             $tanggal_awalTahun = '2023-01-01';
             $tanggal_awal = $_GET['tanggal_awal'];
-            $tanggal_akhir = date('Y-m-d', strtotime('-1 days',strtotime($tanggal_awal)));
+            $tanggal_akhir = date('Y-m-d', strtotime('-1 days', strtotime($tanggal_awal)));
 
             $this->db->select('sum(jml_transaksi) as keluarLalu');
             $this->db->from('sedekah_jumat');
-            $this->db->where('tgl_transaksi BETWEEN"'.$tanggal_awalTahun.'" AND "'.$tanggal_akhir.'"');
+            $this->db->where('tgl_transaksi BETWEEN"' . $tanggal_awalTahun . '" AND "' . $tanggal_akhir . '"');
             $this->db->where('jenis_transaksi', 'Pengeluaran');
             $this->db->order_by('tgl_transaksi');
             $keluarLalu = $this->db->get()->result();
             foreach ($keluarLalu as $row) {
                 $keluarLalu = $row->keluarLalu;
             }
-        }else{
+        } else {
             $this->db->select('sum(jml_transaksi) as keluarLalu');
             $this->db->from('sedekah_jumat');
             $this->db->where('MONTH(tgl_transaksi)', $bulan);
@@ -876,19 +876,19 @@ class Laporan extends CI_Controller
         }
         $saldoLalu =  $masukLalu - $keluarLalu;
 
-        if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])){
+        if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])) {
             $tanggal_awal = $_GET['tanggal_awal'];
             $tanggal_akhir = $_GET['tanggal_akhir'];
             $this->db->select('sum(jml_transaksi) as masuk');
             $this->db->from('sedekah_jumat');
-            $this->db->where('tgl_transaksi BETWEEN"'.$tanggal_awal.'" AND "'.$tanggal_akhir.'"');
+            $this->db->where('tgl_transaksi BETWEEN"' . $tanggal_awal . '" AND "' . $tanggal_akhir . '"');
             $this->db->where('jenis_transaksi', 'Penerimaan');
             $this->db->order_by('tgl_transaksi');
             $masuk = $this->db->get()->result();
             foreach ($masuk as $row) {
                 $masuk = $row->masuk;
             }
-        }else{
+        } else {
             $this->db->select('sum(jml_transaksi) as masuk');
             $this->db->from('sedekah_jumat');
             $this->db->where('MONTH(tgl_transaksi)', $bulan);
@@ -902,19 +902,19 @@ class Laporan extends CI_Controller
             }
         }
 
-        if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])){
+        if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])) {
             $tanggal_awal = $_GET['tanggal_awal'];
             $tanggal_akhir = $_GET['tanggal_akhir'];
             $this->db->select('sum(jml_transaksi) as keluar');
             $this->db->from('sedekah_jumat');
-            $this->db->where('tgl_transaksi BETWEEN"'.$tanggal_awal.'" AND "'.$tanggal_akhir.'"');
+            $this->db->where('tgl_transaksi BETWEEN"' . $tanggal_awal . '" AND "' . $tanggal_akhir . '"');
             $this->db->where('jenis_transaksi', 'Pengeluaran');
             $this->db->order_by('tgl_transaksi');
             $keluar = $this->db->get()->result();
             foreach ($keluar as $row) {
                 $keluar = $row->keluar;
             }
-        }else{
+        } else {
             $this->db->select('sum(jml_transaksi) as keluar');
             $this->db->from('sedekah_jumat');
             $this->db->where('MONTH(tgl_transaksi)', $bulan);
@@ -929,7 +929,7 @@ class Laporan extends CI_Controller
         }
         $totalMasuk = $masuk + $masukLalu - $keluarLalu;
         $totalKeluar = $keluar;
-        $saldo =  $masuk + ($masukLalu - $keluarLalu)- $keluar;
+        $saldo =  $masuk + ($masukLalu - $keluarLalu) - $keluar;
 
         $this->load->library('pdf');
         $pdf = new FPDF('p', 'mm', [325, 215]);
@@ -947,56 +947,56 @@ class Laporan extends CI_Controller
         $pdf->SetFont('scada', '', 10);
         $pdf->Cell(5, 4, '', 0, 0, 'C');
 
-        if (isset($_GET['tanggal_akhir'])){
+        if (isset($_GET['tanggal_akhir'])) {
             $tanggal = $_GET['tanggal_akhir'];
-            }else{
-                $tanggal = date('Y-m-d', strtotime('now'));
-            }
+        } else {
+            $tanggal = date('Y-m-d', strtotime('now'));
+        }
 
-            $pecahkan = explode('-', $tanggal);
-            $bln = $pecahkan[1];
-            $tahun = $pecahkan[0];
-            $tgl = $pecahkan[2];
+        $pecahkan = explode('-', $tanggal);
+        $bln = $pecahkan[1];
+        $tahun = $pecahkan[0];
+        $tgl = $pecahkan[2];
 
-            switch ($bln) {
-                case '1':
-                    $bln = "Januari";
-                    break;
-                case '2':
-                    $bln = "Februari";
-                    break;
-                case '3':
-                    $bln = "Maret";
-                    break;
-                case '4':
-                    $bln = "April";
-                    break;
-                case '5':
-                    $bln = "Mei";
-                    break;
-                case '6':
-                    $bln = "Juni";
-                    break;
-                case '7':
-                    $bln = "Juli";
-                    break;
-                case '8':
-                    $bln = "Agustus";
-                    break;
-                case '9':
-                    $bln = "September";
-                    break;
-                case '10':
-                    $bln = "Oktober";
-                    break;
-                case '11':
-                    $bln = "Nofember";
-                    break;
-                case '12':
-                    $bln = "Desember";
-                    break;
-            }
-            $tanggalFix = $tgl.' '.$bln.' '.$tahun;
+        switch ($bln) {
+            case '1':
+                $bln = "Januari";
+                break;
+            case '2':
+                $bln = "Februari";
+                break;
+            case '3':
+                $bln = "Maret";
+                break;
+            case '4':
+                $bln = "April";
+                break;
+            case '5':
+                $bln = "Mei";
+                break;
+            case '6':
+                $bln = "Juni";
+                break;
+            case '7':
+                $bln = "Juli";
+                break;
+            case '8':
+                $bln = "Agustus";
+                break;
+            case '9':
+                $bln = "September";
+                break;
+            case '10':
+                $bln = "Oktober";
+                break;
+            case '11':
+                $bln = "Nofember";
+                break;
+            case '12':
+                $bln = "Desember";
+                break;
+        }
+        $tanggalFix = $tgl . ' ' . $bln . ' ' . $tahun;
         $pdf->Cell(190, 4, $tanggalFix, 0, 1, 'C');
 
         $pdf->Cell(190, 5, '', 0, 1);
@@ -1011,15 +1011,15 @@ class Laporan extends CI_Controller
 
         $pdf->SetFont('scada', '', 9);
 
-        if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])){
+        if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])) {
             $tanggal_awal = $_GET['tanggal_awal'];
             $tanggal_akhir = $_GET['tanggal_akhir'];
             $this->db->select('*');
             $this->db->from('sedekah_jumat');
-            $this->db->where('tgl_transaksi BETWEEN"'.$tanggal_awal.'" AND "'.$tanggal_akhir.'"');
+            $this->db->where('tgl_transaksi BETWEEN"' . $tanggal_awal . '" AND "' . $tanggal_akhir . '"');
             $this->db->order_by('tgl_transaksi');
             $jumatMasuk =  $this->db->get()->result();
-        }else{
+        } else {
             $this->db->select('*');
             $this->db->from('sedekah_jumat');
             $this->db->where('MONTH(tgl_transaksi)', $bulan);
@@ -1042,55 +1042,55 @@ class Laporan extends CI_Controller
         }
         $pdf->SetFillColor(51, 148, 245,);
         $pdf->Cell(5, 6, '', 0, 0, 'C');
-        $pdf->Cell(85, 6, 'Total', 1, 0, 'C',[35, 178, 222]);
-        $pdf->Cell(50, 6, number_format($totalMasuk, '0', ',', '.') . ',-', 1, 0, 'R',[35, 178, 222]);
-        $pdf->Cell(50, 6, number_format($totalKeluar, '0', ',', '.') . ',-', 1, 1, 'R',[35, 178, 222]);
+        $pdf->Cell(85, 6, 'Total', 1, 0, 'C', [35, 178, 222]);
+        $pdf->Cell(50, 6, number_format($totalMasuk, '0', ',', '.') . ',-', 1, 0, 'R', [35, 178, 222]);
+        $pdf->Cell(50, 6, number_format($totalKeluar, '0', ',', '.') . ',-', 1, 1, 'R', [35, 178, 222]);
 
         $pdf->SetFillColor(29, 117, 240,);
         $pdf->SetFont('scada', '', 10);
         $pdf->Cell(5, 6, '', 0, 0, 'C');
-        $pdf->Cell(85, 6, 'Saldo Akhir', 1, 0, 'C',[29, 117, 240]);
-        $pdf->Cell(100, 6, number_format($saldo, '0', ',', '.') . ',-', 1, 1, 'C',[29, 117, 240]);
+        $pdf->Cell(85, 6, 'Saldo Akhir', 1, 0, 'C', [29, 117, 240]);
+        $pdf->Cell(100, 6, number_format($saldo, '0', ',', '.') . ',-', 1, 1, 'C', [29, 117, 240]);
         $pdf->Cell(5, 6, '', 0, 0, 'C');
-        $pdf->Cell(185, 1, '', 1, 1, 'C',[29, 117, 240]);
+        $pdf->Cell(185, 1, '', 1, 1, 'C', [29, 117, 240]);
 
         $pdf->Cell(5, 5, '', 0, 1, 'C');
         $pdf->Cell(5, 7, '', 0, 0, 'C');
         $pdf->Cell(60, 7, 'LOKASI PENDISTRIBUSIAN :', 0, 0, 'L');
-        if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])){
+        if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])) {
             $tanggal_awal = $_GET['tanggal_awal'];
             $tanggal_akhir = $_GET['tanggal_akhir'];
             $this->db->select('*');
             $this->db->from('lap_jumat');
             $this->db->where('tanggal', $tanggal_akhir);
             $keterangan = $this->db->get()->result();
-        }else{
+        } else {
             $this->db->select('*');
             $this->db->from('lap_jumat');
             $this->db->where('status', 0);
             $keterangan = $this->db->get()->result();
         }
-        foreach($keterangan as $row ){
+        foreach ($keterangan as $row) {
             $pdf->Cell(5, 7, '', 0, 0, 'C');
             $pdf->Cell(120, 7, $row->lokasi, 0, 1, 'L');
         }
 
         $pdf->Cell(5, 7, '', 0, 0, 'C');
         $pdf->Cell(60, 7, 'TARGET PENDISTRIBUSIAN :', 0, 0, 'L');
-        if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])){
+        if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])) {
             $tanggal_awal = $_GET['tanggal_awal'];
             $tanggal_akhir = $_GET['tanggal_akhir'];
             $this->db->select('*');
             $this->db->from('lap_jumat');
             $this->db->where('tanggal', $tanggal_akhir);
             $keterangan = $this->db->get()->result();
-        }else{
+        } else {
             $this->db->select('*');
             $this->db->from('lap_jumat');
             $this->db->where('status', 0);
             $keterangan = $this->db->get()->result();
         }
-        foreach($keterangan as $row ){
+        foreach ($keterangan as $row) {
             $pdf->Cell(5, 7, '', 0, 0, 'C');
             $pdf->Cell(120, 7, $row->target, 0, 1, 'L');
         }
@@ -1098,20 +1098,20 @@ class Laporan extends CI_Controller
         $pdf->Cell(5, 7, '', 0, 0, 'C');
         $pdf->Cell(60, 7, 'TELAH DI DISTRIBUSIKAN :', 0, 0, 'L');
 
-        if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])){
+        if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])) {
             $tanggal_awal = $_GET['tanggal_awal'];
             $tanggal_akhir = $_GET['tanggal_akhir'];
             $this->db->select('*');
             $this->db->from('lap_jumat');
             $this->db->where('tanggal', $tanggal_akhir);
             $keterangan = $this->db->get()->result();
-        }else{
+        } else {
             $this->db->select('*');
             $this->db->from('lap_jumat');
             $this->db->where('status', 0);
             $keterangan = $this->db->get()->result();
         }
-        foreach($keterangan as $row ){
+        foreach ($keterangan as $row) {
             $pdf->Cell(5, 7, '', 0, 0, 'C');
             $pdf->Cell(120, 7, $row->distribusi1, 0, 1, 'L');
             $pdf->Cell(70, 7, '', 0, 0, 'C');
@@ -1122,22 +1122,22 @@ class Laporan extends CI_Controller
 
         $pdf->Cell(5, 7, '', 0, 0, 'C');
         $pdf->Cell(60, 7, 'DONASI LAIN-LAIN :', 0, 0, 'L');
-        
 
-        if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])){
+
+        if (isset($_GET['tanggal_awal']) && ($_GET['tanggal_akhir'])) {
             $tanggal_awal = $_GET['tanggal_awal'];
             $tanggal_akhir = $_GET['tanggal_akhir'];
             $this->db->select('*');
             $this->db->from('lap_jumat');
             $this->db->where('tanggal', $tanggal_akhir);
             $keterangan = $this->db->get()->result();
-        }else{
+        } else {
             $this->db->select('*');
             $this->db->from('lap_jumat');
             $this->db->where('status', 0);
             $keterangan = $this->db->get()->result();
         }
-        foreach($keterangan as $row ){
+        foreach ($keterangan as $row) {
             $pdf->Cell(5, 7, '', 0, 0, 'C');
             $pdf->Cell(120, 7, $row->donasi1, 0, 1, 'L');
             $pdf->Cell(70, 7, '', 0, 0, 'C');
@@ -1152,5 +1152,4 @@ class Laporan extends CI_Controller
 
         $pdf->Output('I', 'Laporan Sedekah Jumat ' . $tanggalFix . '.pdf');
     }
-
 }

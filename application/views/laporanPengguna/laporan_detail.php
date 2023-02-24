@@ -4,17 +4,17 @@
             <div class="card">
                 <div class="card-header title">
                     <div class="row">
-                    <?php 
+                        <?php
                         $namaDonasi = $this->uri->segment(4);
                         $namaDonasi = preg_replace("/[^a-zA-Z\']/", " ", $namaDonasi);
-                    ?>
+                        ?>
                         <div class="col-7">
                             <a class="fw-bold text-dark logo" style="text-decoration:none ;"><?= strtoupper($title) ?> <?= strtoupper($namaDonasi)  ?></a>
-                        </div>  
+                        </div>
                         <?php
-                                $nama_id = $this->uri->segment(3);
-                                $nama_donasi = $this->uri->segment(4);
-                            ?>
+                        $nama_id = $this->uri->segment(3);
+                        $nama_donasi = $this->uri->segment(4);
+                        ?>
                         <div class="col-5">
                             <a href="<?= $url_cetak; ?>" target="_blank" class="btn btn-success btn-sm logo"><i class="fas fa-file-alt"></i> Export PDF</a>
                             <a id="belum"><button class="btn btn-warning btn-sm logo"><i class="fas fa-calendar-alt"></i> Pilih Waktu</button></a>
@@ -27,7 +27,64 @@
                     <?= $this->session->unset_userdata('info'); ?>
                 </div>
                 <div class="card-body">
-                    <div class="row justify-content-center mb-1" id="tanya" style="display: none;">
+                    <div class="row mb-2" id="tanya" style="display: none;">
+                        <div class="col-xl-12">
+                            <div class="card bg-light shadow text-center text-dark">
+                                <div class="card-body">
+                                    <?php
+                                    $nama_id = $this->uri->segment(3);
+                                    $nama_donasi = $this->uri->segment(4);
+                                    ?>
+                                    <form action="<?= base_url('laporanPengguna/detail') ?>/<?= $nama_id ?>/<?= $nama_donasi ?>" method="GET">
+                                        <div class="row">
+                                            <div class="col-md-3 d-grid gap-2">
+                                                <button class="btn btn-block btn-outline-secondary" disabled>Pilih Bulan & Tahun :</button>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <?php $bulan = date('m'); ?>
+                                                    <select name="bulan" class="form-select mb-1" required>
+                                                        <!-- <option value="<?php echo $bulan = date('m'); ?>">Bulan</option> -->
+                                                        <option value="01" <?= $bulan == '01' ? 'selected' : '' ?>>Januari</option>
+                                                        <option value="02" <?= $bulan == '02' ? 'selected' : '' ?>>Februari</option>
+                                                        <option value="03" <?= $bulan == '03' ? 'selected' : '' ?>>Maret</option>
+                                                        <option value="04" <?= $bulan == '04' ? 'selected' : '' ?>>April</option>
+                                                        <option value="05" <?= $bulan == '05' ? 'selected' : '' ?>>Mei</option>
+                                                        <option value="06" <?= $bulan == '06' ? 'selected' : '' ?>>Juni</option>
+                                                        <option value="07" <?= $bulan == '07' ? 'selected' : '' ?>>Juli</option>
+                                                        <option value="08" <?= $bulan == '08' ? 'selected' : '' ?>>Agustus</option>
+                                                        <option value="09" <?= $bulan == '09' ? 'selected' : '' ?>>September</option>
+                                                        <option value="10" <?= $bulan == '10' ? 'selected' : '' ?>>Oktober</option>
+                                                        <option value="11" <?= $bulan == '11' ? 'selected' : '' ?>>November</option>
+                                                        <option value="12" <?= $bulan == '12' ? 'selected' : '' ?>>Desember</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <select name="tahun" class="form-select mb-1">
+                                                        <?php
+                                                        $mulai = date('Y') - 2;
+                                                        for ($i = $mulai; $i < $mulai + 11; $i++) {
+                                                            $sel = $i == date('Y') ? ' selected="selected"' : '';
+                                                            echo '<option value="' . $i . '"' . $sel . '>' . $i . '</option>';
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="d-grid gap-2">
+                                                    <button type="submit" name="add_post" id="tombol_pilih" class="btn btn-block btn-outline-primary">Tampilkan</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row justify-content-center mb-1" id="tanya" style="display: none;">
                         <div class="col-md-4">
                             <div class="card bg-light shadow text-center text-dark">
                                 <div class="card-body">
@@ -40,7 +97,6 @@
                                         <div class="form-group">
                                             <?php $bulan = date('m'); ?>
                                             <select name="bulan" class="form-select mb-1" required>
-                                                <!-- <option value="<?php echo $bulan = date('m'); ?>">Bulan</option> -->
                                                 <option value="01" <?= $bulan == '01' ? 'selected' : '' ?>>Januari</option>
                                                 <option value="02" <?= $bulan == '02' ? 'selected' : '' ?>>Februari</option>
                                                 <option value="03" <?= $bulan == '03' ? 'selected' : '' ?>>Maret</option>
@@ -71,7 +127,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row">
                         <?php
                         $bln = $this->input->post('bulan', true);
