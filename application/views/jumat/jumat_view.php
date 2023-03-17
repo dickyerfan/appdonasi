@@ -4,10 +4,10 @@
             <div class="card">
                 <div class="card-header shadow">
                     <div class="row">
-                        <div class="col-7">
+                        <div class="col-lg-7">
                             <a class="fw-bold text-dark" style="text-decoration:none ;"><?= strtoupper($title) ?></a>
                         </div>
-                        <div class="col-5">
+                        <div class="col-lg-5">
                             <a href="<?= base_url('jumat/tambah/'); ?>"><button class="btn btn-success btn-sm"><i class="fas fa-plus"></i> Input Transaksi</button></a>
                             <!-- <a id="saldo"><button class="btn btn-success btn-sm logo"><i class="fas fa-dollar"></i> Saldo Awal</button></a> -->
                             <button id="belum" class="btn btn-warning btn-sm"><i class="fas fa-calendar-alt"></i> Pilih Waktu</button>

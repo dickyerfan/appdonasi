@@ -4,10 +4,10 @@
             <div class="card">
                 <div class="card-header title">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-lg-6">
                             <a class="fw-bold text-dark logo" style="text-decoration:none ;"><?= strtoupper($title) ?></a>
                         </div>
-                        <div class="col-6">
+                        <div class="col-lg-6">
                             <a href="<?= (isset($_GET['add_post'])) ? $url_cetak : 'javascript:void(0)' ?>" target="_blank" class="btn btn-success btn-sm logo"><i class="fas fa-file-alt"></i> Export PDF</a>
                             <a id="belum"><button class="btn btn-warning btn-sm logo"><i class="fas fa-calendar-alt"></i> Pilih Waktu</button></a>
                             <a href="<?= base_url('laporan/tambahDonasi'); ?>"><button class="btn btn-secondary btn-sm"><i class="fas fa-plus"></i> input Donasi</button></a>

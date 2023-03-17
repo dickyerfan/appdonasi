@@ -6,18 +6,22 @@ class Model_donasiUmum extends CI_Model
 
     public function getAll()
     {
-        return $this->db->get('donasi')->result();
+        $this->db->select('*');
+        $this->db->from('donasi');
+        $this->db->order_by('id_donasi', 'ASC');
+        return $this->db->get()->result();
+        // return $this->db->get('donasi')->result();
     }
 
     public function getAllDonasi()
     {
-        
-        if (isset($_GET['add_post'])){
+
+        if (isset($_GET['add_post'])) {
             // $bulan = $this->input->post('bulan', true);
             // $tahun = $this->input->post('tahun', true);
             $bulan = $_GET['bulan'];
             $tahun = $_GET['tahun'];
-        }else{
+        } else {
             $bulan = date('m');
             $tahun = date('Y');
         }
@@ -26,7 +30,7 @@ class Model_donasiUmum extends CI_Model
 
         $this->db->select('*');
         $this->db->from('donasi');
-        $this->db->join('transaksi','donasi.id_donasi = transaksi.id_donasi');
+        $this->db->join('transaksi', 'donasi.id_donasi = transaksi.id_donasi');
         $this->db->where('transaksi.id_donasi', $id);
         $this->db->where('MONTH(tgl_transaksi)', $bulan);
         $this->db->where('YEAR(tgl_transaksi)', $tahun);
@@ -86,15 +90,15 @@ class Model_donasiUmum extends CI_Model
     public function getSaldo()
     {
         $id_donasi = $this->uri->segment(3);
-            if(isset($_POST['addSaldo'])){
-                $bulan = $this->input->post('bulan', true);
-                $tahun = $this->input->post('tahun', true);
-                if ($bulan < 10) {
-                    $bulan = str_split($bulan)[1];
-                }
+        if (isset($_POST['addSaldo'])) {
+            $bulan = $this->input->post('bulan', true);
+            $tahun = $this->input->post('tahun', true);
+            if ($bulan < 10) {
+                $bulan = str_split($bulan)[1];
+            }
 
             return $this->db->query("SELECT * FROM transaksi WHERE month(tgl_transaksi)=$bulan AND year(tgl_transaksi)= $tahun AND kode_saldo = 1 AND id_donasi = $id_donasi ORDER BY tgl_transaksi")->result();
-        }else{
+        } else {
             $bulan = date('m');
             $tahun = date('Y');
 

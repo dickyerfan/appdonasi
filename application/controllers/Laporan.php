@@ -703,6 +703,12 @@ class Laporan extends CI_Controller
         $data['totalKeluarLalu'] = $keluarLalu;
         $data['saldoLalu'] =  $masukLalu - $keluarLalu;
 
+        if ($data['saldoLalu'] < 0) {
+            $data['saldoLalu'] =  0;
+        } else {
+            $data['saldoLalu'] =  $masukLalu - $keluarLalu;
+        }
+
         if (isset($_GET['add_post'])) {
             $tanggal_awal = $_GET['tanggal_awal'];
             $tanggal_akhir = $_GET['tanggal_akhir'];
@@ -755,8 +761,20 @@ class Laporan extends CI_Controller
             }
         }
         $data['totalMasuk'] = $masuk + $masukLalu - $keluarLalu;
+        if ($data['totalMasuk'] < 0) {
+            $data['totalMasuk'] = 0;
+        } else {
+            $data['totalMasuk'] = $masuk + $masukLalu - $keluarLalu;
+        }
+
         $data['totalKeluar'] = $keluar;
         $data['saldo'] =  $masuk + ($masukLalu - $keluarLalu) - $keluar;
+
+        if ($data['saldo'] < 0) {
+            $data['saldo'] = 0;
+        } else {
+            $data['saldo'] =  $masuk + ($masukLalu - $keluarLalu) - $keluar;
+        }
 
 
         $data['title'] = 'Laporan Sedekah Jumat';

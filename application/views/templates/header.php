@@ -21,9 +21,45 @@
     <link href="<?= base_url(); ?>assets/datatables/bootstrap5/dataTables.bootstrap5.min.css" rel="stylesheet">
 
     <style>
-        .bg-primary:hover{
+        .cardEffect:hover {
+            transition: transform 0.5s;
             box-shadow: 2px 2px 10px rgb(0, 0, 0);
-            transform: translateY(-6px);
+            transform: translateY(-6px) translateX(6px);
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(5deg);
+            }
+
+            100% {
+                transform: rotate(-10deg);
+            }
+        }
+
+        .cardEffect2:hover {
+            box-shadow: 2px 2px 10px rgb(0, 0, 0);
+            animation: spin 0.4s ease-in-out;
+        }
+
+        .cardEffect3 {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .cardEffect3:hover {
+            transform: scale(1.05);
+        }
+
+        .cardEffect4 {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .cardEffect4:hover {
+            transform: translateY(35px);
         }
 
         .judul {
@@ -55,65 +91,73 @@
         }
 
         /* setting carousel */
-        .img-wrapper{
-            max-width:100%;
-            height:65vw;
-            display:flex;
-            justify-content:center;
+        .img-wrapper {
+            max-width: 100%;
+            height: 65vw;
+            display: flex;
+            justify-content: center;
             /* align-items:flex-start; */
         }
 
-        img{
-            max-width:100%;
-            max-height:100%;
+        img {
+            max-width: 100%;
+            max-height: 100%;
         }
 
 
         @media (max-width:576px) {
-            .namaDonasi{
-            font-size:1em;
+            .namaDonasi {
+                font-size: 1em;
             }
+
             .fontRupiah {
-                font-size:.9em;
+                font-size: .9em;
             }
         }
 
         @media (min-width:576px) {
-            .carousel-inner{
+            .carousel-inner {
                 display: flex;
             }
+
             .carousel-item {
                 display: block;
-                margin-right:0;
-                flex: 0 0 calc(100%/3); 
+                margin-right: 0;
+                flex: 0 0 calc(100%/3);
             }
-            .img-wrapper{
-            height:20vw;
-            background-color:skyblue;           
+
+            .img-wrapper {
+                height: 20vw;
+                background-color: skyblue;
             }
         }
 
         .carousel-inner {
-                padding: 1em;
-            }
-        .card1{
-                margin:0 .5em;
-                border:0px;
-                border-radius:10;
-                box-shadow:2px 6px 8px 0 rgba(22, 22, 26,.18);
-                background-color:orange;
-            }
-        .carousel-control-prev, .carousel-control-next{
-            width:6vh;
-            height:6vh;
-            background-color:#e1e1e1;
-            border-radius:50%;
-            top:50%;
+            padding: 1em;
+        }
+
+        .card1 {
+            margin: 0 .5em;
+            border: 0px;
+            border-radius: 10;
+            box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, .18);
+            background-color: orange;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 6vh;
+            height: 6vh;
+            background-color: #e1e1e1;
+            border-radius: 50%;
+            top: 50%;
             transform: translateY(-50%);
         }
-        .carousel-control-prev:hover, .carousel-control-next:hover{
+
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
             opacity: .9;
-        }    
+        }
     </style>
 
 </head>

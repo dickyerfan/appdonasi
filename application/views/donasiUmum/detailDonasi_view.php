@@ -4,10 +4,10 @@
             <div class="card">
                 <div class="card-header shadow">
                     <div class="row">
-                        <div class="col-7">
+                        <div class="col-lg-7">
                             <a class="fw-bold text-dark" style="text-decoration:none ;"><?= strtoupper($title) ?></a>
                         </div>
-                        <div class="col-5">
+                        <div class="col-lg-5">
                             <?php
                             $table = $this->uri->segment(4);
                             $idDonasi = $this->uri->segment(3);

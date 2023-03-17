@@ -40,7 +40,7 @@ class Auth extends CI_Controller
                       </div>');
                         helper_log('login', 'User Melakukan login');
                         redirect('dashboard');
-                    }elseif($cek_nama_pengguna->level == 'SuperAdmin') {
+                    } elseif ($cek_nama_pengguna->level == 'SuperAdmin') {
                         $data_session = [
                             'nama_pengguna' => $cek_nama_pengguna->nama_pengguna,
                             'nama_lengkap' => $cek_nama_pengguna->nama_lengkap,
@@ -102,7 +102,7 @@ class Auth extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Registrasi';
-            $this->load->view('auth/view_registrasi', $data);
+            $this->load->view('auth/view_login', $data);
         } else {
             $this->model_auth->registrasi();
             helper_log_reg('Daftar User Baru', 'Sebagai Pengguna');

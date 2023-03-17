@@ -17,7 +17,7 @@ class DonasiUmum extends CI_Controller
                       </div>'
             );
             redirect('auth');
-        }elseif(!$this->session->userdata('level')){
+        } elseif (!$this->session->userdata('level')) {
             $this->session->set_flashdata(
                 'info',
                 '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -33,7 +33,6 @@ class DonasiUmum extends CI_Controller
 
         $data['title'] = 'DAFTAR DONASI UMUM';
         $data['detailDonasi'] = $this->Model_donasiUmum->getAll();
-
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('templates/sidebar');
@@ -74,7 +73,7 @@ class DonasiUmum extends CI_Controller
         $namaDonasi = $this->uri->segment(4);
         $idDonasi = $this->uri->segment(5);
 
-        helper_log('Hapus Transaksi di '.$namaDonasi.' | id : '.$id_transaksi, $this->input->post('nama_transaksi').' '.$this->input->post('jml_transaksi').' '.$this->input->post('tgl_transaksi'));
+        helper_log('Hapus Transaksi di ' . $namaDonasi . ' | id : ' . $id_transaksi, $this->input->post('nama_transaksi') . ' ' . $this->input->post('jml_transaksi') . ' ' . $this->input->post('tgl_transaksi'));
 
         $this->Model_donasiUmum->hapusData($id);
         $this->session->set_flashdata(
@@ -86,7 +85,7 @@ class DonasiUmum extends CI_Controller
                   </div>'
         );
 
-        redirect('donasiUmum/detail/' .$idDonasi.'/'. $namaDonasi);
+        redirect('donasiUmum/detail/' . $idDonasi . '/' . $namaDonasi);
     }
 
     public function edit($id)
@@ -109,7 +108,7 @@ class DonasiUmum extends CI_Controller
         $title = preg_replace("/[^a-zA-Z&']/", " ", $title);
         $namaDonasi = $this->uri->segment(4);
         $idDonasi = $this->uri->segment(3);
-        
+
         $this->Model_donasiUmum->updateData();
 
         $this->session->set_flashdata(
@@ -120,9 +119,8 @@ class DonasiUmum extends CI_Controller
                     </button>
                   </div>'
         );
-        helper_log('Update Transaksi di '.$namaDonasi.' | id : '.$this->input->post('id_transaksi'), $this->input->post('nama_transaksi').' | '.$this->input->post('jml_transaksi').' | '.$this->input->post('tgl_transaksi'));
-        redirect('donasiUmum/detail/' .$idDonasi.'/'. $namaDonasi);
-        
+        helper_log('Update Transaksi di ' . $namaDonasi . ' | id : ' . $this->input->post('id_transaksi'), $this->input->post('nama_transaksi') . ' | ' . $this->input->post('jml_transaksi') . ' | ' . $this->input->post('tgl_transaksi'));
+        redirect('donasiUmum/detail/' . $idDonasi . '/' . $namaDonasi);
     }
 
     public function tambah()
@@ -144,7 +142,7 @@ class DonasiUmum extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
-            $this->load->view('donasiUmum/detailDonasi_tambah',$data);
+            $this->load->view('donasiUmum/detailDonasi_tambah', $data);
             $this->load->view('templates/footer');
         } else {
             $this->Model_donasiUmum->tambahData();
@@ -156,27 +154,27 @@ class DonasiUmum extends CI_Controller
                     </button>
                   </div>'
             );
-            helper_log('Tambah Transaksi di '.$namaDonasi, $this->input->post('nama_transaksi').' | '.$this->input->post('jml_transaksi').' | '.date('Y-m-d'));
-            redirect('donasiUmum/detail/' .$idDonasi.'/'. $namaDonasi);
+            helper_log('Tambah Transaksi di ' . $namaDonasi, $this->input->post('nama_transaksi') . ' | ' . $this->input->post('jml_transaksi') . ' | ' . date('Y-m-d'));
+            redirect('donasiUmum/detail/' . $idDonasi . '/' . $namaDonasi);
         }
     }
 
     public function ambilSaldoAwal()
     {
-            $bulanskrng = date('m');
-            if ($bulanskrng < 10) {
-                $bulanskrng = str_split($bulanskrng)[1];
-            }
-            $tahun = date('Y');
+        $bulanskrng = date('m');
+        if ($bulanskrng < 10) {
+            $bulanskrng = str_split($bulanskrng)[1];
+        }
+        $tahun = date('Y');
 
-            if($bulanskrng == 1){
-                $bulanLalu = 12;
-                $tahun = $tahun - 1;
-            }else{
-                $bulanLalu = $bulanskrng - 1;
-                $tahun = date('Y');
-            }
-        
+        if ($bulanskrng == 1) {
+            $bulanLalu = 12;
+            $tahun = $tahun - 1;
+        } else {
+            $bulanLalu = $bulanskrng - 1;
+            $tahun = date('Y');
+        }
+
         $id = $this->uri->segment(3);
 
         $bulanSaldo = date('m');
@@ -184,7 +182,7 @@ class DonasiUmum extends CI_Controller
 
         $namaDonasi = $this->uri->segment(4);
         // $namaDonasi = preg_replace("/[^a-zA-Z-\']/", "", $namaDonasi);
-        $alamat = 'donasiUmum/detail/' . $id .'/' . $namaDonasi ;
+        $alamat = 'donasiUmum/detail/' . $id . '/' . $namaDonasi;
 
         $this->db->select('sum(jml_transaksi) as masuk');
         $this->db->from('transaksi');
@@ -208,9 +206,9 @@ class DonasiUmum extends CI_Controller
             $keluar = $row->keluar;
         }
         $saldo = $masuk - $keluar;
-    
+
         $bulanDB = $this->Model_donasiUmum->getSaldo();
-        foreach($bulanDB as $row){
+        foreach ($bulanDB as $row) {
             $bulanDB = $row->jml_transaksi;
         }
 
@@ -255,7 +253,7 @@ class DonasiUmum extends CI_Controller
         }
         $tampilTahun = date('Y');
 
-        if ($saldo == $bulanDB){
+        if ($saldo == $bulanDB) {
 
             $this->session->set_flashdata(
                 'info',
@@ -266,15 +264,15 @@ class DonasiUmum extends CI_Controller
               </div>'
             );
             redirect($alamat);
-        }else {
+        } else {
             $data = [
                 "id_donasi" => $id,
-                "nama_transaksi" => 'Saldo Awal '. $tampilBulan.' '.$tampilTahun,
+                "nama_transaksi" => 'Saldo Awal ' . $tampilBulan . ' ' . $tampilTahun,
                 "jml_transaksi" => $saldo,
-                "tgl_transaksi" => $tahunSaldo.'-'.$bulanSaldo.'-'.'01',
+                "tgl_transaksi" => $tahunSaldo . '-' . $bulanSaldo . '-' . '01',
                 "jenis_transaksi" => 'Penerimaan',
                 "nama_user" => 'Admin',
-                "tgl_input" => $tahunSaldo.'-'.$bulanSaldo.'-'.'01',
+                "tgl_input" => $tahunSaldo . '-' . $bulanSaldo . '-' . '01',
                 "kode_saldo" => 1
             ];
             $this->db->insert('transaksi', $data);
@@ -286,7 +284,7 @@ class DonasiUmum extends CI_Controller
                 </button>
               </div>'
             );
-            helper_log('Tambah Saldo Awal di '.$namaDonasi, date('Y-m-d'));
+            helper_log('Tambah Saldo Awal di ' . $namaDonasi, date('Y-m-d'));
             redirect($alamat);
         }
     }
