@@ -50,7 +50,7 @@
                             <div class="card border-0 shadow cardEffect3" style="height:100% ;">
                                 <div class="card-body bg-primary border-top border-warning border-5 rounded">
                                     <a href="<?= base_url('donasiKhusus/tabunganQurban') ?>">
-                                        <img class="mb-2" src="<?= base_url('assets/img/donasi2.jpg') ?>">
+                                        <img class="mb-2" src="<?= base_url('assets/img/taqur.jpeg') ?>">
                                     </a>
                                     <div class="row">
                                         <?php
